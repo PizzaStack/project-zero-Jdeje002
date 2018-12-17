@@ -1,15 +1,24 @@
 package com.revature;
 
+import java.io.IOException;
+
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
-        System.out.println( "Hello! Please enter Number option \n 1.login Unique Id \n 2.Sign up account"  );
-        Customers customer = new Customers();
-        customer.setUpAccount();
+     
+//        Customers customer = new Customers();
+        
+       
+        BankAccount bankAccount = new BankAccount("test","123");
+        bankAccount.showMenu();
+        
+//        customer.setUpAccount();
+//        customer.obtainDataFromUserForNewCustomer();
     }        
 }
