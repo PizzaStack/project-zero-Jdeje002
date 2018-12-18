@@ -2,35 +2,25 @@ package com.revature;
 
 import java.util.Scanner;
 
-public class BankAccount {
-	int balance;
-	int previousTransaction;
-	String customerName;
-	String customerId;
+public class Account {
 	
+	double balance;
+	double previousTransaction;
 	
-//	protected BankAccount(String cname, String cId)
-//	{
-//		customerName = cname;
-//		customerId = cId;
-//	}
-//	
-	
+	// deposit
 	 void deposit(int amount) {
-		if(amount != 0) {
-			balance = balance - amount;
-			previousTransaction = amount;
-			
-		}
-	 }
-	 
-	 
+			if(amount != 0) {
+				balance = balance + amount;
+				previousTransaction = amount;
+				
+			}
+		 }
+	 // withdraw
 	 void withdraw (int amount) {
 		 balance = balance - amount;
-		 previousTransaction = -amount;
+		 previousTransaction = amount;
 	 }
-	 
-	 
+	 // View 
 	 void getPerviousTransaction() {
 		 if (previousTransaction > 0) {
 			 System.out.println("Balance: " + previousTransaction);
@@ -44,18 +34,18 @@ public class BankAccount {
 	 }
 	 
 	 void showMenu() {
-		 char option = '\0';
+		 int option = 0;
 		 Scanner scanner = new Scanner(System.in);
 		 
-		 System.out.println("Welcome " + customerName);
-		 System.out.println("You Quique Id is : " + customerId);
+		 System.out.println("Welcome ");
+		 System.out.println("==========================");
 		 System.out.println("\n");
 		 
-		 System.out.println("A. Check Balance" );
-		 System.out.println("B. Deposit");
-		 System.out.println("C. Withdraw");
-		 System.out.println("D. Previous Transaction");
-		 System.out.println("D. Exit App");
+		 System.out.println("1. Check Balance" );
+		 System.out.println("2. Deposit");
+		 System.out.println("3. Withdraw");
+		 System.out.println("4. Previous Transaction");
+		 System.out.println("5. Exit App");
 		 
 		 do 
 		 {
@@ -63,19 +53,20 @@ public class BankAccount {
 			 System.out.println("Enter a Letter Option");
 			 System.out.println("========================================");
 	
-			 option = scanner.next().charAt(0);
+			 option = scanner.nextInt();
+			 
 			 System.out.println("\n");
 			 
 			 
 			 switch(option) {
 			 
-			 case 'A':
+			 case 1:
 				 System.out.println("===============================");
 				 System.out.println("Balance = "+ balance);
 				 System.out.println("===============================");
 				 System.out.println("\n");
 				 break;
-			 case 'B':
+			 case 2:
 				 System.out.println("===============================");
 				 System.out.println("Enter Deposit amount "+ balance);
 				 System.out.println("===============================");
@@ -86,7 +77,7 @@ public class BankAccount {
 				 System.out.println("\n");
 				 break;
 				 
-			 case 'C' : 
+			 case 3 : 
 				 System.out.println("===============================");
 				 System.out.println("Enter Withdraw amount ");
 				 System.out.println("===============================");
@@ -95,13 +86,13 @@ public class BankAccount {
 				 withdraw(amount2);
 				 System.out.println("\n");
 				 break;
-			 case 'D' : 
+			 case 4 : 
 				 System.out.println("===============================");
 				 getPerviousTransaction();
 				 System.out.println("===============================");
 				 System.out.println("\n");
 				 break;
-			 case 'E':
+			 case 5:
 				 System.out.println("===============================");
 				 break;
 			
@@ -113,9 +104,8 @@ public class BankAccount {
 				 
 			 
 		 }
-		 while(option != 'E');
+		 while(option != 5);
 		 System.out.println("Thank you.");
 	 }
 	 
-	
 }

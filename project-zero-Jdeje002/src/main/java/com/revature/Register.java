@@ -32,6 +32,7 @@ public class Register {
 		 System.out.println("Enter you a Password");
 		 System.out.println("========================================");
 		
+		 this.password = scanner.nextLine();
 		 
 		 try (
 

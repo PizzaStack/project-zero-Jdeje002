@@ -26,7 +26,8 @@ public class StartUp {
 		 switch (option) {
 		 // Sign in 
 		 case 1:
-			 
+			 Account account = new Account();
+			 account.showMenu();
 			 break;
 		 // register
 		 case 2:
