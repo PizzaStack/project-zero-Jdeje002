@@ -9,8 +9,10 @@ public class EmployeeTest {
 	
 	@Test
 	public void canInstansiate() {
-		Employee employee = new Employee();
+		EmployeeStartUp employee = new EmployeeStartUp();
+		employee.startUpEmployee();
 		
+		EmployeeRegsister register = new EmployeeRegister();
 	}
 	
 	

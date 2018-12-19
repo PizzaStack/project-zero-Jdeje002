@@ -18,13 +18,13 @@ public class Login {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("========================================");
-		System.out.println("Enter you name");
+		System.out.println("Please enter your name");
 		System.out.println("========================================");
 
 		this.userName = scanner.nextLine();
 
 		System.out.println("========================================");
-		System.out.println("Enter you a Password");
+		System.out.println("Please enter your Password");
 		System.out.println("========================================");
 
 		this.passWord = scanner.nextLine();
@@ -42,7 +42,7 @@ public class Login {
 		try {
 			Connection db = DriverManager.getConnection(url, username, password);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name = '" + this.userName + "';");
+			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name1 = '" + this.userName + "';");
 			comparePassword = null;
 
 			while (rs.next()) {

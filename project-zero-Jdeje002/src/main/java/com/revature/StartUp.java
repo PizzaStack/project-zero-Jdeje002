@@ -16,7 +16,7 @@ public class StartUp {
 		 System.out.println("1. Sign in" );
 		 System.out.println("2. Register new Account");
 		 
-		 System.out.println("D. Exit App");
+		 System.out.println("3. Exit App");
 		 System.out.println("=======================================" );
 		 
 		 int option = 0;
@@ -36,7 +36,12 @@ public class StartUp {
 			 Login L1 = new Login();
 			 L1.logIn();
 			 break;
-		 
+		 case 3 :
+			 System.out.println("Thank you , Good-bye");
+			 break;
+		 default: 
+			 System.out.println("Sorry was not an option.");
+			 break;
 		 }
 	}
 }
