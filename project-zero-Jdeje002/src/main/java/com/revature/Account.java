@@ -34,6 +34,9 @@ public class Account {
 	 }
 	 
 	 void showMenu() {
+		 
+		 
+		 
 		 int option = 0;
 		 Scanner scanner = new Scanner(System.in);
 		 
@@ -47,10 +50,15 @@ public class Account {
 		 System.out.println("4. Previous Transaction");
 		 System.out.println("5. Exit App");
 		 
-		 do 
-		 {
+		 do {
 			 System.out.println("========================================");
 			 System.out.println("Enter a Letter Option");
+			 System.out.println("========================================");
+			 System.out.println("1. Check Balance" );
+			 System.out.println("2. Deposit");
+			 System.out.println("3. Withdraw");
+			 System.out.println("4. Previous Transaction");
+			 System.out.println("5. Exit App");
 			 System.out.println("========================================");
 	
 			 option = scanner.nextInt();
@@ -62,19 +70,24 @@ public class Account {
 			 
 			 case 1:
 				 System.out.println("===============================");
-				 System.out.println("Balance = "+ balance);
+				 System.out.println("Balance = "+balance);
 				 System.out.println("===============================");
 				 System.out.println("\n");
 				 break;
 			 case 2:
 				 System.out.println("===============================");
-				 System.out.println("Enter Deposit amount "+ balance);
+				 System.out.println("Enter Deposit amount: " );
 				 System.out.println("===============================");
 				
 				 int amount = scanner.nextInt();
 				 deposit(amount);
 				 
 				 System.out.println("\n");
+				 
+				 System.out.println("========================================");
+				 System.out.println("Balance is now :"+ balance);
+				 System.out.println("========================================");
+					
 				 break;
 				 
 			 case 3 : 
@@ -85,6 +98,9 @@ public class Account {
 				 int amount2 = scanner.nextInt();
 				 withdraw(amount2);
 				 System.out.println("\n");
+				 System.out.println("========================================");
+				 System.out.println("Balance is now :"+ balance);
+				 System.out.println("========================================");
 				 break;
 			 case 4 : 
 				 System.out.println("===============================");

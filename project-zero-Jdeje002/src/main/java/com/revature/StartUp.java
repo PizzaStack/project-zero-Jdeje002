@@ -26,8 +26,8 @@ public class StartUp {
 		 switch (option) {
 		 // Sign in 
 		 case 1:
-			 Account account = new Account();
-			 account.showMenu();
+			 Login L = new Login();
+			 L.logIn();
 			 break;
 		 // register
 		 case 2:
