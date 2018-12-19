@@ -1,5 +1,9 @@
 package com.revature;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class Account {
@@ -7,35 +11,9 @@ public class Account {
 	double balance;
 	double previousTransaction;
 	
-	// deposit
-	 void deposit(int amount) {
-			if(amount != 0) {
-				balance = balance + amount;
-				previousTransaction = amount;
-				
-			}
-		 }
-	 // withdraw
-	 void withdraw (int amount) {
-		 balance = balance - amount;
-		 previousTransaction = amount;
-	 }
-	 // View 
-	 void getPerviousTransaction() {
-		 if (previousTransaction > 0) {
-			 System.out.println("Balance: " + previousTransaction);
-		 }
-		 else if (previousTransaction < 0 ) {
-			 System.out.println("Withdrawed : " + Math.abs(previousTransaction));
-		 }
-		 else {
-			 System.out.println("No transaction occured");
-		 }
-	 }
+	
 	 
-	 void showMenu() {
-		 
-		 
+	 void showMenu(int id) {
 		 
 		 int option = 0;
 		 Scanner scanner = new Scanner(System.in);
@@ -80,7 +58,7 @@ public class Account {
 				 System.out.println("===============================");
 				
 				 int amount = scanner.nextInt();
-				 deposit(amount);
+				 deposit(amount, id);
 				 
 				 System.out.println("\n");
 				 
@@ -96,7 +74,7 @@ public class Account {
 				 System.out.println("===============================");
 				 
 				 int amount2 = scanner.nextInt();
-				 withdraw(amount2);
+				 withdraw(amount2,id);
 				 System.out.println("\n");
 				 System.out.println("========================================");
 				 System.out.println("Balance is now :"+ balance);
@@ -117,11 +95,62 @@ public class Account {
 			
 			 }
 			
-				 
+			// db  	
+			 try {
+		         Class.forName("org.postgresql.Driver");
+		     }
+		     catch (java.lang.ClassNotFoundException e) {
+		         System.out.println(e.getMessage());
+		     }
+
+		     String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
+		     String username = "nxdkszrk";
+		     String password = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
+
+		     try {
+		         Connection db = DriverManager.getConnection(url, username, password);
+		         Statement st = db.createStatement();
+		         st.executeQuery("UPDATE customer "
+		         		+ "SET balance = " +balance
+		         		+ " WHERE customer_id = "+id+";");
+		         
+		         
+		         st.close();
+		         // needed
+		         db.close();
+		         }
+		     catch (java.sql.SQLException e) {
+		         
+		     }
 			 
 		 }
 		 while(option != 5);
 		 System.out.println("Thank you.");
 	 }
-	 
+
+		// deposit
+		 void deposit(int amount, int id) {
+				if(amount != 0) {
+					balance = balance + amount;
+					previousTransaction = amount;
+					
+				}
+			 }
+		 // withdraw
+		 void withdraw (int amount, int id) {
+			 balance = balance - amount;
+			 previousTransaction = amount;
+		 }
+		 // View 
+		 void getPerviousTransaction() {
+			 if (previousTransaction > 0) {
+				 System.out.println("Deposited: " + previousTransaction);
+			 }
+			 else if (previousTransaction < 0 ) {
+				 System.out.println("Withdrawed : " + Math.abs(previousTransaction));
+			 }
+			 else {
+				 System.out.println("No transaction occured");
+			 }
+		 }
 }

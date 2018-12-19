@@ -33,6 +33,8 @@ public class StartUp {
 		 case 2:
 			 Register register = new Register();
 			 register.signUp();
+			 Login L1 = new Login();
+			 L1.logIn();
 			 break;
 		 
 		 }

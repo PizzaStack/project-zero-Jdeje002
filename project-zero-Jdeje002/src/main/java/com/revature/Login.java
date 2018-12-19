@@ -11,6 +11,7 @@ public class Login {
 	private String userName;
 	private String passWord;
 	private String comparePassword;
+	private int id;
 
 	public void logIn() {
 
@@ -41,12 +42,12 @@ public class Login {
 		try {
 			Connection db = DriverManager.getConnection(url, username, password);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("SELECT password FROM customer Where name = '" + this.userName + "';");
-			comparePassword = null; 
-			
-			while (rs.next()) {
-				comparePassword = rs.getString(1);
+			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name = '" + this.userName + "';");
+			comparePassword = null;
 
+			while (rs.next()) {
+				comparePassword = rs.getString(2);
+				 id = rs.getInt(1);
 //	             System.out.println(rs.getString(2));
 //	             System.out.print("Column 2 returned ");
 //	             System.out.println(rs.getString(3));
@@ -59,21 +60,19 @@ public class Login {
 			System.out.println(e.getMessage());
 		}
 
-		
-		if( comparePassword == null) {
+		if (comparePassword == null) {
 			System.out.println("========================================");
 			System.out.println("Username does not exist. Try again.");
 			System.out.println("========================================");
-		} else if(comparePassword.equals(passWord)) {
+		} else if (comparePassword.equals(passWord)) {
 			Account account = new Account();
-			account.showMenu();
+			account.showMenu(id);
 		} else {
 			System.out.println("========================================");
 			System.out.println("Username and Password does not match.");
 			System.out.println("========================================");
 		}
-		
-		
+
 	}
 
 }
