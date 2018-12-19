@@ -48,7 +48,7 @@ public class Login {
 			while (rs.next()) {
 				comparePassword = rs.getString(2);
 				 id = rs.getInt(1);
-//	             System.out.println(rs.getString(2));
+//	             System.out.println(comparePassword);
 //	             System.out.print("Column 2 returned ");
 //	             System.out.println(rs.getString(3));
 			}
