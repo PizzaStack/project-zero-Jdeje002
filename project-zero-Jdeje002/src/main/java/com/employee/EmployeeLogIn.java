@@ -1,4 +1,4 @@
-package com.revature;
+package com.employee;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,18 +6,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Login {
+import com.revature.Account;
+import com.revature.Login;
 
-	protected String userName;
-	protected String passWord;
-	protected String comparePassword;
-	protected int id;
-	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
-	protected String usernameDb = "nxdkszrk";
-	protected String passwordDb = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
+public class EmployeeLogIn extends Login{
 
-	public void logIn() {
-
+		
+	public void employeeLogIn() {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("========================================");
@@ -28,29 +23,29 @@ public class Login {
 		System.out.println("Please enter your name");
 		System.out.println("========================================");
 
-		this.userName = scanner.nextLine();
+		super.userName = scanner.nextLine();
 
 		System.out.println("========================================");
 		System.out.println("Please enter your Password");
 		System.out.println("========================================");
 
-		this.passWord = scanner.nextLine();
-
+		super.passWord = scanner.nextLine();
+		connectToEmployeeDb();
 		
-		
-
+	}
+	
+	public void connectToEmployeeDb() {
 		try {
-			Connection db = DriverManager.getConnection(url, usernameDb, passwordDb);
+			Connection db = DriverManager.getConnection(super.url, super.usernameDb, super.passwordDb);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name1 = '" + this.userName + "';");
-			comparePassword = null;
+			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name1 = '" + super.userName + "';");
+			super.comparePassword = null;
 
 			while (rs.next()) {
-				comparePassword = rs.getString(2);
-				 id = rs.getInt(1);
-//	             System.out.println(comparePassword);
-//	             System.out.print("Column 2 returned ");
-//	             System.out.println(rs.getString(3));
+				super.comparePassword = rs.getString(2);
+				super.id = rs.getInt(1);
+				System.out.println(super.comparePassword);
+//	             
 			}
 			rs.close();
 			st.close();
@@ -59,20 +54,21 @@ public class Login {
 		} catch (java.sql.SQLException e) {
 			System.out.println(e.getMessage());
 		}
-
-		if (comparePassword == null) {
+		
+		if (super.comparePassword == null) {
 			System.out.println("========================================");
 			System.out.println("Username does not exist. Try again.");
 			System.out.println("========================================");
-		} else if (comparePassword.equals(passWord)) {
+		} else if (super.comparePassword.equals(super.passWord)) {
 			Account account = new Account();
-			account.showMenu(id);
+			account.showMenu(super.id);
 		} else {
 			System.out.println("========================================");
 			System.out.println("Username and Password does not match.");
 			System.out.println("========================================");
 		}
-
 	}
-
+	
+	
+	
 }

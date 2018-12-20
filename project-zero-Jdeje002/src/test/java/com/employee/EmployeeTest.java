@@ -12,7 +12,8 @@ public class EmployeeTest {
 		EmployeeStartUp employee = new EmployeeStartUp();
 		employee.startUpEmployee();
 		
-		EmployeeRegsister register = new EmployeeRegister();
+		EmployeeMenu employeeMenu = new EmployeeMenu();
+		EmployeeLogIn employeeSignIn = new EmployeelogIn();
 	}
 	
 	

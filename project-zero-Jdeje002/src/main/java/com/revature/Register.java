@@ -11,8 +11,11 @@ import java.util.Scanner;
 
 public class Register {
 
-	private String userName;
-	private String password;
+	protected String userName;
+	protected String password;
+	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
+	protected String username = "nxdkszrk";
+	protected String dbpassword = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
 
 	
 	public void signUp() {
@@ -33,16 +36,7 @@ public class Register {
 		System.out.println("========================================");
 
 		this.password = scanner.nextLine();
-
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (java.lang.ClassNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-
-		String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
-		String username = "nxdkszrk";
-		String dbpassword = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
+		
 
 		try {
 			Connection db = DriverManager.getConnection(url, username, dbpassword);

@@ -22,7 +22,7 @@ public class Account {
 
 	String password = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
 
-	void showMenu(int id) {
+	public void showMenu(int id) {
 
 		int option = 0;
 
