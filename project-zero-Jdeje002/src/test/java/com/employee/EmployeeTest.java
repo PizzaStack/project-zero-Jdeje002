@@ -9,11 +9,13 @@ public class EmployeeTest {
 	
 	@Test
 	public void canInstansiate() {
-		EmployeeStartUp employee = new EmployeeStartUp();
-		employee.startUpEmployee();
+		
 		
 		EmployeeMenu employeeMenu = new EmployeeMenu();
-		EmployeeLogIn employeeSignIn = new EmployeelogIn();
+		EmployeeLogIn employeeSignIn = new EmployeeLogIn();
+		EmployeeAccount employeeAccount = new EmployeeAcount();
+		EmployeeCheckAccounts eca = new EmployeeCheckAccounts();
+		
 	}
 	
 	

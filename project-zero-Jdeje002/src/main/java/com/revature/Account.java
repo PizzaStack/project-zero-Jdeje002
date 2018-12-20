@@ -12,15 +12,15 @@ import java.util.Scanner;
 
 public class Account {
 
-	double balance;
+	protected double balance;
 
-	double previousTransaction;
+	protected double previousTransaction;
 	
-	String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
+	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
 
-	String username = "nxdkszrk";
+	protected String username = "nxdkszrk";
 
-	String password = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
+	protected String password = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
 
 	public void showMenu(int id) {
 

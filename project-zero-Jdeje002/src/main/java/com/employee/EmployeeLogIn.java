@@ -22,14 +22,16 @@ public class EmployeeLogIn extends Login{
 		System.out.println("========================================");
 		System.out.println("Please enter your name");
 		System.out.println("========================================");
-
+		System.out.println("\n");
 		super.userName = scanner.nextLine();
 
 		System.out.println("========================================");
 		System.out.println("Please enter your Password");
 		System.out.println("========================================");
+		System.out.println("\n");
 
 		super.passWord = scanner.nextLine();
+		
 		connectToEmployeeDb();
 		
 	}
@@ -38,7 +40,7 @@ public class EmployeeLogIn extends Login{
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.usernameDb, super.passwordDb);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name1 = '" + super.userName + "';");
+			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM employee Where name1 = '" + super.userName + "';");
 			super.comparePassword = null;
 
 			while (rs.next()) {
@@ -60,8 +62,10 @@ public class EmployeeLogIn extends Login{
 			System.out.println("Username does not exist. Try again.");
 			System.out.println("========================================");
 		} else if (super.comparePassword.equals(super.passWord)) {
-			Account account = new Account();
-			account.showMenu(super.id);
+			
+			EmployeeAccount ea = new EmployeeAccount();
+			ea.showEmployeeAccountMenu();
+			
 		} else {
 			System.out.println("========================================");
 			System.out.println("Username and Password does not match.");
