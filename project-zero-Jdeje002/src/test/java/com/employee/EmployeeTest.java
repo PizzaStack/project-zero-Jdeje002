@@ -13,11 +13,17 @@ public class EmployeeTest {
 		
 		EmployeeMenu employeeMenu = new EmployeeMenu();
 		EmployeeLogIn employeeSignIn = new EmployeeLogIn();
-		EmployeeAccount employeeAccount = new EmployeeAcount();
+		EmployeeApproval employeeApproval = new EmployeeApproval();
 		EmployeeCheckAccounts eca = new EmployeeCheckAccounts();
+		EmployeeDeleteAccount edca = new EmployeeDeleteAccount();
+		
 		
 	}
 	
+	@Test
+	public void employeeApproveOrDeny() {
+		
+	}
 	
 	
 }

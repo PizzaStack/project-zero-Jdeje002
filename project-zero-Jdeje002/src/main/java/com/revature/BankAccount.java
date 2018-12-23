@@ -9,12 +9,6 @@ public class BankAccount {
 	String customerId;
 	
 	
-//	protected BankAccount(String cname, String cId)
-//	{
-//		customerName = cname;
-//		customerId = cId;
-//	}
-//	
 	
 	 void deposit(int amount) {
 		if(amount != 0) {

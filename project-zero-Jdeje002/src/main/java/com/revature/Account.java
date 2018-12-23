@@ -54,6 +54,7 @@ public class Account {
 			option = scanner.nextInt();
 
 			System.out.println("\n");
+			
 			balance = getBalance(id);
 
 			switch (option) {

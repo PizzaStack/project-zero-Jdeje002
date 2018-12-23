@@ -19,7 +19,10 @@ public class EmployeeAccount {
 			System.out.println("========================================");
 			System.out.println("1.View all accounts");
 			System.out.println("2.View Pending Accounts");
-			System.out.println("3.Exit");
+			System.out.println("3.Approve/Deny Pending accounts");
+			System.out.println("4.Delete Account");
+		
+			System.out.println("4.Exit");
 			
 			System.out.println("========================================");
 			System.out.println("\n");
@@ -36,9 +39,21 @@ public class EmployeeAccount {
 				break;
 			
 			case 2:
+				ViewEmployeeApproval Ea = new ViewEmployeeApproval();
+				Ea.viewPendingApproval();
 				break;
-			
 			case 3:
+	
+				EmployeeApproval ap = new EmployeeApproval();
+				
+				ap.approvalProcess();
+				
+				break;
+			case 4:
+				EmployeeDeleteAccount EDA = new EmployeeDeleteAccount();
+				EDA.deleteCustomerAccount(); 
+				break;
+			case 5:
 				System.out.println("========================================");
 				System.out.println("Exiting Program.");
 				System.out.println("========================================");

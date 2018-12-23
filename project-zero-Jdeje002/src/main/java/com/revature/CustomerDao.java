@@ -11,12 +11,6 @@ public class CustomerDao {
 	public void conntact() {
 		
 		
-		 try {
-	         Class.forName("org.postgresql.Driver");
-	     }
-	     catch (java.lang.ClassNotFoundException e) {
-	         System.out.println(e.getMessage());
-	     }
 
 	     String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
 	     String username = "nxdkszrk";
