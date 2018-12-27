@@ -41,7 +41,7 @@ public class EmployeeRegister extends Register {
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.username, super.dbpassword);
 			Statement st = db.createStatement();
-			st.executeQuery("INSERT INTO employee (name1,password) values ('" + super.userName + "','"
+			st.executeUpdate("INSERT INTO employee (name1,password) values ('" + super.userName + "','"
 					+ super.password +"');");
 
 			// rs.close();

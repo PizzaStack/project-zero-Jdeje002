@@ -16,6 +16,8 @@ public class Register {
 	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
 	protected String username = "nxdkszrk";
 	protected String dbpassword = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
+	private int id;
+	
 
 	
 	public void signUp() {
@@ -37,7 +39,22 @@ public class Register {
 
 		this.password = scanner.nextLine();
 		
+		setUpAccount();
+		getAccountId();
+		
+		System.out.println("========================================");
+		System.out.println("Thank you, "+userName+" , your bank account number is: "+id);
+		System.out.println("========================================");
+		
+		
+		System.out.println("========================================");
+		System.out.println("Thank you, please pick an option below.");
+		System.out.println("========================================");
 
+	}
+	
+	//setup Account
+	public void setUpAccount () {
 		try {
 			Connection db = DriverManager.getConnection(url, username, dbpassword);
 			Statement st = db.createStatement();
@@ -51,9 +68,29 @@ public class Register {
 		} catch (java.sql.SQLException e) {
 			// System.out.println(e.getMessage());
 		}
-		System.out.println("========================================");
-		System.out.println("Thank you, please pick an option below.");
-		System.out.println("========================================");
-
 	}
+ 
+	public void getAccountId() {
+		try {
+			Connection db = DriverManager.getConnection(url, username, dbpassword);
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name1 = '" + this.userName + "';");
+			
+
+			while (rs.next()) {
+				
+				 id = rs.getInt(1);
+//	             
+	             System.out.print(id);
+//	             
+			}
+			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 }
