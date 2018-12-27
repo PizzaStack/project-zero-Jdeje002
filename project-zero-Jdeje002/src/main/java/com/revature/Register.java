@@ -41,15 +41,18 @@ public class Register {
 		
 		setUpAccount();
 		getAccountId();
+		System.out.println("\n");
 		
 		System.out.println("========================================");
 		System.out.println("Thank you, "+userName+" , your bank account number is: "+id);
 		System.out.println("========================================");
 		
+		System.out.println("\n");
 		
 		System.out.println("========================================");
 		System.out.println("Thank you, please pick an option below.");
 		System.out.println("========================================");
+		System.out.println("\n");
 
 	}
 	

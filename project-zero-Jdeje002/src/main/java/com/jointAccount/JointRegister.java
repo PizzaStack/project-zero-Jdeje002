@@ -17,9 +17,11 @@ public class JointRegister {
 	protected String mainAccountHolderId;
 	protected String secondaryAccountHolder;
 	protected String secondaryAccountHolderId;
-	protected String userName;
-	protected String passWord;
-	protected Double Balance;
+	protected String accountPassword;
+	protected Double jointBalance;
+	protected Double mainAccountBalance;
+	protected Double secondaryAccountBalance;
+	protected int jointAccountId;
 
 	public void startUp() {
 		// scanner
@@ -32,7 +34,7 @@ public class JointRegister {
 		System.out.println("\n");
 
 		this.mainAccountHolderId = scanner.nextLine();
-		setMainAccountHolderName(); 
+		setMainAccountHolderName();
 
 		System.out.println("===============================================");
 
@@ -42,6 +44,26 @@ public class JointRegister {
 
 		this.secondaryAccountHolderId = scanner.nextLine();
 		SetSecondaryAccountHolder();
+
+		System.out.println("===============================================");
+		System.out.println("Enter A Password For the Account.");
+		System.out.println("===============================================");
+		System.out.println("\n");
+
+		this.accountPassword = scanner.nextLine();
+		// users new balance
+		SetJointaccountBalance();
+		// db insert new user into table
+		setUpJointAccountTable();
+		// get joint account account Id
+		System.out.println("works 1");
+		getJointAccountId();
+		System.out.println("works 2");
+
+		System.out.println("===============================================");
+		System.out.println("Your Account Id is: " + jointAccountId);
+		System.out.println("===============================================");
+		System.out.println("\n");
 
 	}
 
@@ -53,11 +75,7 @@ public class JointRegister {
 					.executeQuery("SELECT name1 FROM customer Where customer_id = '" + this.mainAccountHolderId + "';");
 
 			while (rs.next()) {
-
 				mainAccountHolder = rs.getString(1);
-//	             System.out.println(comparePassword);
-//	             System.out.print("Column 2 returned ");
-//	             System.out.println(rs.getString(3));
 			}
 			rs.close();
 			st.close();
@@ -67,21 +85,103 @@ public class JointRegister {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	public void SetSecondaryAccountHolder() {
 		try {
 			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
 			Statement st = db.createStatement();
-			ResultSet rs = st
-					.executeQuery("SELECT name1 FROM customer Where customer_id = '" + this.secondaryAccountHolderId + "';");
+			ResultSet rs = st.executeQuery(
+					"SELECT name1 FROM customer Where customer_id = '" + this.secondaryAccountHolderId + "';");
 
 			while (rs.next()) {
-
 				secondaryAccountHolder = rs.getString(1);
-//	             System.out.println(comparePassword);
-//	             System.out.print("Column 2 returned ");
-//	             System.out.println(rs.getString(3));
+
 			}
 			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void getMainBalance() {
+		try {
+			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery(
+					"SELECT balance FROM customer Where customer_id = '" + this.mainAccountHolderId + "';");
+
+			while (rs.next()) {
+				mainAccountBalance = rs.getDouble(1);
+			}
+			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void getSecondaryBalance() {
+		try {
+			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery(
+					"SELECT balance FROM customer Where customer_id = '" + this.secondaryAccountHolderId + "';");
+
+			while (rs.next()) {
+				secondaryAccountBalance = rs.getDouble(1);
+
+			}
+			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void SetJointaccountBalance() {
+		getMainBalance();
+		getSecondaryBalance();
+		jointBalance = secondaryAccountBalance + mainAccountBalance;
+
+	}
+
+	public void getJointAccountId() {
+		System.out.println(this.mainAccountHolder);
+		try {
+			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery(
+					"SELECT customer_id FROM jointaccount Where mainaccountholder = '" + this.mainAccountHolder + "';");
+
+			while (rs.next()) {
+				jointAccountId = rs.getInt(1);
+
+			}
+			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void setUpJointAccountTable() {
+		try {
+			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
+			Statement st = db.createStatement();
+			st.executeUpdate(
+					"INSERT INTO jointaccount (mainAccountHolder,secondaryAccountHolder,password,balance,accountApproved) values('"
+							+ this.mainAccountHolder + "','" + this.secondaryAccountHolder + "','"
+							+ this.accountPassword + "','" + jointBalance + "','pending')");
+
 			st.close();
 			// needed
 			db.close();
