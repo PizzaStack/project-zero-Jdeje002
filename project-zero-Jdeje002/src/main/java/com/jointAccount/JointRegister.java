@@ -56,9 +56,8 @@ public class JointRegister {
 		// db insert new user into table
 		setUpJointAccountTable();
 		// get joint account account Id
-		System.out.println("works 1");
+
 		getJointAccountId();
-		System.out.println("works 2");
 
 		System.out.println("===============================================");
 		System.out.println("Your Account Id is: " + jointAccountId);
@@ -153,7 +152,7 @@ public class JointRegister {
 	}
 
 	public void getJointAccountId() {
-		System.out.println(this.mainAccountHolder);
+
 		try {
 			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
 			Statement st = db.createStatement();
