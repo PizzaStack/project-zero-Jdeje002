@@ -2,6 +2,7 @@ package com.revature;
 
 import java.util.Scanner;
 
+import com.jointAccount.JointLogIn;
 import com.jointAccount.JointRegister;
 
 public class StartUp {
@@ -34,6 +35,8 @@ public class StartUp {
 			 L.logIn();
 			 break;
 		 case 2:
+			 JointLogIn jointLogin = new JointLogIn();
+			 jointLogin.jointLogIn();
 			 
 			 break;
 		 // register
