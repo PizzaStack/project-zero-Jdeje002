@@ -1,4 +1,16 @@
 # Project 0: Banking App
+### How To Use
+Start New Maven Project using Pom file. 
+
+### How To work On app
+Crate new accoun. Used name to start and password. Save your account number.
+Customer can deposit, withdraw and see current balance
+Joint Accounts can be created by placing Id of both users and will promt to create password for account.
+
+### Admins
+Admins can approve or deny accounts 
+Admins can delete accounts.
+
 
 ### Part 1
 **Description**
