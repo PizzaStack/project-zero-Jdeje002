@@ -11,12 +11,13 @@ import com.revature.Account;
 public class ViewEmployeeApproval extends Account {
 	
 	public void viewPendingApproval() {
+		EmployeeAccount employeeAccount = new EmployeeAccount();
 		System.out.println("========================================");
 		System.out.println("The following account needs Arroval");
 		System.out.println("========================================");
 		System.out.println("\n");
 		getStatusArroval();
-		
+		employeeAccount.showEmployeeAccountMenu();
 	}
 	
 	public void getStatusArroval() {
