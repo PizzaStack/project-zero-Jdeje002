@@ -46,8 +46,6 @@ public class EmployeeLogIn extends Login{
 			while (rs.next()) {
 				super.comparePassword = rs.getString(2);
 				super.id = rs.getInt(1);
-				
-//	             
 			}
 			rs.close();
 			st.close();

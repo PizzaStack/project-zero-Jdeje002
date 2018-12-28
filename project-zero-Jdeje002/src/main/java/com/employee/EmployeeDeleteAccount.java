@@ -20,6 +20,7 @@ public class EmployeeDeleteAccount extends Account {
 		System.out.println("========================================");
 		
 		Id = scanner.nextInt();
+		
 		getId();
 		deleteAccount();
 		
