@@ -46,6 +46,8 @@ public class JointAccount {
 				break;
 			case 3:
 				// Withdraw
+				JointWithdraw withdaw = new JointWithdraw(); 
+				withdaw.withdrawFromJointAccount(jointAccountId);
 				break;
 			case 4:
 				System.out.println("========================================");

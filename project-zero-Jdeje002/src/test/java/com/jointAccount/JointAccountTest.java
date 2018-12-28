@@ -10,6 +10,7 @@ public class JointAccountTest {
 		JointAccount jA = new JointAccount();
 		JointCheckBalance jcb = new JointCheckBalance();
 		JointDeposit jointDeposit = new JointDeposit();
+		JointWithdraw jointWithdraw = new JointWithdraw();
 	}
 
 	

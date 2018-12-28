@@ -6,33 +6,41 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class JointDeposit extends JointRegister {
-
+public class JointWithdraw extends JointRegister{
+	
 	protected double oldBalance;
 	protected double newBalance;
-	protected double userDeposit;
+	protected double userWithdrawal;
 	
 	Scanner scanner = new Scanner(System.in);
-
-	public void depositIntoBalance(int jointAccountId) {
+	
+	public void withdrawFromJointAccount(int jointAccountId) {
 		
 		System.out.println("===============================");
-		System.out.println("Enter Deposit amount: ");
+		System.out.println("Enter Withdrawal amount: ");
 		System.out.println("===============================");
 		System.out.println("\n");
-		
-		this.userDeposit = scanner.nextDouble();
+	
+		this.userWithdrawal = scanner.nextDouble();
 		connectDb(jointAccountId);
-		newBalance = oldBalance + userDeposit;
+		newBalance = oldBalance - userWithdrawal;
+		if(newBalance <= 0) {
+			System.out.println("\n");
+			System.out.println("========================================");
+			System.out.println("insufficient funds");
+			System.out.println("========================================");
+		}else {
+			setNewBalance(jointAccountId,newBalance);
+			
+			System.out.println("\n");
+			System.out.println("========================================");
+			System.out.println("Balance is now :" + newBalance);
+			System.out.println("========================================");
+		}
 		
-		setNewBalance(jointAccountId,newBalance);
-		
-		System.out.println("\n");
-		System.out.println("========================================");
-		System.out.println("Balance is now :" + newBalance);
-		System.out.println("========================================");
 	}
-
+	
+	
 	public void connectDb(int jointAccountId) {
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.dbUserName, super.dbPassword);
@@ -54,7 +62,6 @@ public class JointDeposit extends JointRegister {
 		}
 
 	}
-
 	public void setNewBalance(double jointAccountId, double newBalance) {
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.dbUserName, super.dbPassword);

@@ -9,12 +9,11 @@ import java.util.Scanner;
 import com.revature.Account;
 
 public class JointLogIn extends JointRegister {
-	
+
 	private String comparePassword;
 	private String tryPassword;
 	private int jointAccountId;
-	
-	
+
 	public void jointLogIn() {
 		Scanner scanner = new Scanner(System.in);
 
@@ -33,7 +32,7 @@ public class JointLogIn extends JointRegister {
 		System.out.println("========================================");
 
 		tryPassword = scanner.nextLine();
-		
+
 		checkJointaccount();
 		CheckPassword();
 	}
@@ -42,9 +41,9 @@ public class JointLogIn extends JointRegister {
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.dbUserName, super.dbPassword);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("Select password, customer_id From Jointaccount where customer_id ="
-					+ super.jointAccountId + "");
-			
+			ResultSet rs = st.executeQuery(
+					"Select password, customer_id From Jointaccount where customer_id =" + super.jointAccountId + "");
+
 			comparePassword = null;
 			while (rs.next()) {
 				comparePassword = rs.getString(1);
@@ -58,8 +57,9 @@ public class JointLogIn extends JointRegister {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	public void CheckPassword() {
-		
+
 		if (comparePassword == null) {
 			System.out.println("========================================");
 			System.out.println("Username does not exist. Try again.");
@@ -67,10 +67,8 @@ public class JointLogIn extends JointRegister {
 		} else if (comparePassword.equals(this.tryPassword)) {
 			JointAccount jointAccount = new JointAccount();
 			jointAccount.showMenu(jointAccountId);
-			
-			System.out.println("works");
 		} else {
-			
+
 			System.out.println("========================================");
 			System.out.println("Username and Password does not match.");
 			System.out.println("========================================");

@@ -72,7 +72,7 @@ public class Account {
 
 				System.out.println("===============================");
 
-				int amount = scanner.nextInt();
+				double amount = scanner.nextDouble();
 
 				deposit(amount, id);
 
@@ -94,7 +94,7 @@ public class Account {
 
 				System.out.println("===============================");
 
-				int amount2 = scanner.nextInt();
+				double amount2 = scanner.nextDouble();
 
 				withdraw(amount2, id);
 
@@ -145,7 +145,7 @@ public class Account {
 
 
 	
-	void deposit(int amount, int id) {
+	void deposit(double amount, int id) {
 
 		if (amount != 0) {
 
@@ -163,11 +163,18 @@ public class Account {
 
 	// withdraw
 
-	void withdraw(int amount, int id) {
-
+	void withdraw(double amount, int id) {
 		balance = balance - amount;
-		setBalance(balance, id);
-		previousTransaction = amount;
+		
+		if(balance <= 0) {
+		System.out.println("=============================");
+		System.out.println("insufficient funds");
+		System.out.println("=============================");
+		} else {
+			
+			setBalance(balance, id);
+			previousTransaction = amount;
+		}
 
 	}
 	
