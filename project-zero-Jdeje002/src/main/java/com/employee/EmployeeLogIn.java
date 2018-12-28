@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import com.employeeJointApproval.EmployeeJointAccount;
 import com.revature.Account;
 import com.revature.Login;
 
@@ -60,9 +61,25 @@ public class EmployeeLogIn extends Login{
 			System.out.println("Username does not exist. Try again.");
 			System.out.println("========================================");
 		} else if (super.comparePassword.equals(super.passWord)) {
+			int option;
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("========================================");
+			System.out.println("1. View Checking accounts.");
+			System.out.println("2. View Joint Account.");
+			System.out.println("========================================");
 			
-			EmployeeAccount ea = new EmployeeAccount();
-			ea.showEmployeeAccountMenu();
+			option = scanner.nextInt();
+			switch(option) {
+			case 1:
+				EmployeeAccount ea = new EmployeeAccount();
+				ea.showEmployeeAccountMenu();
+				break;
+			case 2:
+				EmployeeJointAccount employeeJointAccount = new EmployeeJointAccount();
+				employeeJointAccount.EmployeeViewJoint();
+				break;
+			}
+			
 			
 		} else {
 			System.out.println("========================================");

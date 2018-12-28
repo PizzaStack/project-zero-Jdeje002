@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class Register {
 
 	protected String userName;
@@ -18,7 +20,7 @@ public class Register {
 	protected String dbpassword = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
 	private int id;
 	
-
+	static final Logger log = Logger.getLogger(App.class);
 	
 	public void signUp() {
 		Scanner scanner = new Scanner(System.in);
@@ -64,7 +66,8 @@ public class Register {
 			st.executeQuery("INSERT INTO customer (name1,password, balance, approved) values ('" + userName + "','"
 					+ password + "',0,'Pending')");
 
-			// rs.close();
+			log.info("new user added "+userName+"and "+password+" Account is pending and blance is 0");
+			
 			st.close();
 			// needed
 			db.close();

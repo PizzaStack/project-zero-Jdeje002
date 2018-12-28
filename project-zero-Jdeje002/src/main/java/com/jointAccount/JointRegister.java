@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+import com.revature.App;
+
 public class JointRegister {
 	// db account info
 	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
@@ -24,6 +28,8 @@ public class JointRegister {
 	protected int jointAccountId;
 	protected String approvalMain;
 	protected String approvalSecondary;
+
+	static final Logger log = Logger.getLogger(App.class);
 
 	public void startUp() {
 		// scanner
@@ -53,15 +59,15 @@ public class JointRegister {
 		System.out.println("\n");
 
 		this.accountPassword = scanner.nextLine();
-		 
-		getApprovalMain() ;
-		getApprovalSecondary();	
-		
-		if(approvalMain.equals("Pending") ||approvalSecondary.equals("Pending") ) {
+
+		getApprovalMain();
+		getApprovalSecondary();
+
+		if (approvalMain.equals("Pending") || approvalSecondary.equals("Pending")) {
 			System.out.println("========================================");
 			System.out.println("Accounts has not been approved");
 			System.out.println("========================================");
-		}else if(approvalMain.equals("Deny")||approvalSecondary.equals("Deny")) {
+		} else if (approvalMain.equals("Deny") || approvalSecondary.equals("Deny")) {
 			System.out.println("========================================");
 			System.out.println("Account has not been denied");
 			System.out.println("========================================");
@@ -79,14 +85,15 @@ public class JointRegister {
 			System.out.println("===============================================");
 			System.out.println("\n");
 		}
-			
 
 	}
+
 	public void getApprovalMain() {
 		try {
 			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("SELECT approved from customer Where customer_id = '" + this.mainAccountHolderId + "';");
+			ResultSet rs = st.executeQuery(
+					"SELECT approved from customer Where customer_id = '" + this.mainAccountHolderId + "';");
 			while (rs.next()) {
 				approvalMain = rs.getString(1);
 			}
@@ -98,11 +105,13 @@ public class JointRegister {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	public void getApprovalSecondary() {
 		try {
 			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("SELECT approved from customer Where customer_id = '" + this.secondaryAccountHolderId+ "';");
+			ResultSet rs = st.executeQuery(
+					"SELECT approved from customer Where customer_id = '" + this.secondaryAccountHolderId + "';");
 			while (rs.next()) {
 				approvalSecondary = rs.getString(1);
 			}
@@ -114,6 +123,7 @@ public class JointRegister {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	public void setMainAccountHolderName() {
 		try {
 			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
@@ -227,8 +237,11 @@ public class JointRegister {
 			st.executeUpdate(
 					"INSERT INTO jointaccount (mainAccountHolder,secondaryAccountHolder,password,balance,accountApproved) values('"
 							+ this.mainAccountHolder + "','" + this.secondaryAccountHolder + "','"
-							+ this.accountPassword + "','" + jointBalance + "','pending')");
-
+							+ this.accountPassword + "','" + jointBalance + "','Pending')");
+			
+			log.info("New Joint Acocunt made with: " + mainAccountHolder + " " + secondaryAccountHolder
+					+ " with a balance of " + jointBalance + " and a password of : " + accountPassword);
+			
 			st.close();
 			// needed
 			db.close();

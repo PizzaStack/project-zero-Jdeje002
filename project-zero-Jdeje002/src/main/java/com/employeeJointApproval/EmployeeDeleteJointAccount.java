@@ -1,4 +1,4 @@
-package com.employee;
+package com.employeeJointApproval;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,15 +6,17 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import com.employee.EmployeeAccount;
 import com.revature.Account;
 
-public class EmployeeDeleteAccount extends Account {
-	private int Id;
+public class EmployeeDeleteJointAccount extends Account {
+
+private int Id;
 	
 	public void deleteCustomerAccount() {
 
 		Scanner scanner = new Scanner(System.in);
-		
+		EmployeeAccount employeeAccount = new EmployeeAccount();
 		System.out.println("========================================");
 		System.out.println("Enter Cutomer Id To Delete Account");
 		System.out.println("========================================");
@@ -29,7 +31,8 @@ public class EmployeeDeleteAccount extends Account {
 		System.out.println("Account Deleted, Returning to menu.");
 		System.out.println("========================================");
 		
-	
+		EmployeeJointAccount employeeJointAccount = new EmployeeJointAccount();
+		employeeJointAccount.EmployeeViewJoint();
 		
 
 	}
@@ -37,7 +40,7 @@ public class EmployeeDeleteAccount extends Account {
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.username, super.password);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("Select customer_id from customer where customer_id =" + Id);
+			ResultSet rs = st.executeQuery("Select customer_id from Jointaccount where customer_id =" + Id);
 			while (rs.next()) {
 				Id = rs.getInt(1);
 			}
@@ -54,7 +57,7 @@ public class EmployeeDeleteAccount extends Account {
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.username, super.password);
 			Statement st = db.createStatement();
-			st.executeUpdate("DELETE FROM customer Where customer_id ="+ Id+";");
+			st.executeUpdate("DELETE FROM Jointaccount Where customer_id ="+ Id+";");
 			
 			st.close();
 			
@@ -64,6 +67,5 @@ public class EmployeeDeleteAccount extends Account {
 			// System.out.println(e.getMessage());
 		}
 	}
-
 
 }

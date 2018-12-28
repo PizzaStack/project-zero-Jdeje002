@@ -1,7 +1,10 @@
 package com.revature;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+
+import org.apache.log4j.PropertyConfigurator;
 
 import com.employee.EmployeeMenu;
 import com.employee.EmployeeRegister;
@@ -13,6 +16,8 @@ import com.employee.EmployeeRegister;
 public class App {
 
 	public static void main(String[] args) throws IOException {
+	 	PropertyConfigurator.configure(System.getProperty("user.dir") + File.separator +
+                "\\src\\main\\log4j.properties");
 		// scanner
 		Scanner scanner = new Scanner(System.in);
 		// Switch case for Employee, customer and admin

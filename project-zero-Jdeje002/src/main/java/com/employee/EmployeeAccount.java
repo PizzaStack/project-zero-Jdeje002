@@ -13,12 +13,12 @@ public class EmployeeAccount {
 			System.out.println("\n");
 			
 			System.out.println("========================================");
-			System.out.println("1.View all accounts");
+			System.out.println("1.View Checking accounts");
 			System.out.println("2.View Pending Accounts");
 			System.out.println("3.Approve/Deny Pending accounts");
 			System.out.println("4.Delete Account");
 		
-			System.out.println("4.Exit");
+			System.out.println("5.Exit");
 			
 			System.out.println("========================================");
 			System.out.println("\n");
@@ -42,7 +42,6 @@ public class EmployeeAccount {
 			case 3:
 	
 				EmployeeApproval ap = new EmployeeApproval();
-				
 				ap.approvalProcess();
 				
 				break;

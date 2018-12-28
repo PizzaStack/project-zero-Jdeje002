@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+
 public class Login {
 
 	protected String userName;
@@ -16,6 +19,9 @@ public class Login {
 	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
 	protected String usernameDb = "nxdkszrk";
 	protected String passwordDb = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
+	
+	static final Logger log = Logger.getLogger(App.class);
+
 
 	public void logIn() {
 
@@ -59,7 +65,7 @@ public class Login {
 			Statement st = db.createStatement();
 			ResultSet rs = st.executeQuery("SELECT approved from customer Where name1 = '" + this.userName + "';");
 			comparePassword = null;
-
+			
 			while (rs.next()) {
 				approval = rs.getString(1);
 			}
@@ -78,7 +84,7 @@ public class Login {
 			Statement st = db.createStatement();
 			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM customer Where name1 = '" + this.userName + "';");
 			comparePassword = null;
-
+			log.info(this.userName+" Logged into account");
 			while (rs.next()) {
 				comparePassword = rs.getString(2);
 				 id = rs.getInt(1);
