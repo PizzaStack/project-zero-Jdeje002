@@ -12,6 +12,7 @@ public class JointLogIn extends JointRegister {
 	
 	private String comparePassword;
 	private String tryPassword;
+	private int jointAccountId;
 	
 	
 	public void jointLogIn() {
@@ -41,13 +42,13 @@ public class JointLogIn extends JointRegister {
 		try {
 			Connection db = DriverManager.getConnection(super.url, super.dbUserName, super.dbPassword);
 			Statement st = db.createStatement();
-			ResultSet rs = st.executeQuery("Select password From Jointaccount where customer_id ="
+			ResultSet rs = st.executeQuery("Select password, customer_id From Jointaccount where customer_id ="
 					+ super.jointAccountId + "");
 			
 			comparePassword = null;
 			while (rs.next()) {
 				comparePassword = rs.getString(1);
-	
+				jointAccountId = rs.getInt(2);
 			}
 			rs.close();
 			st.close();
@@ -64,7 +65,9 @@ public class JointLogIn extends JointRegister {
 			System.out.println("Username does not exist. Try again.");
 			System.out.println("========================================");
 		} else if (comparePassword.equals(this.tryPassword)) {
-			//log ino account
+			JointAccount jointAccount = new JointAccount();
+			jointAccount.showMenu(jointAccountId);
+			
 			System.out.println("works");
 		} else {
 			

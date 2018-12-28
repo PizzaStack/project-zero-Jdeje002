@@ -7,6 +7,9 @@ public class JointAccountTest {
 	public  void caninstansiate() {
 		JointLogIn jl = new JointLogIn();
 		JointRegister jr = new JointRegister();
+		JointAccount jA = new JointAccount();
+		JointCheckBalance jcb = new JointCheckBalance();
+		JointDeposit jointDeposit = new JointDeposit();
 	}
 
 	

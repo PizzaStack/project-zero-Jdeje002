@@ -34,21 +34,13 @@ public class Account {
 		do {
 
 			System.out.println("========================================");
-
 			System.out.println("Enter a Letter Option");
-
 			System.out.println("========================================");
-
 			System.out.println("1. Check Balance");
-
 			System.out.println("2. Deposit");
-
 			System.out.println("3. Withdraw");
-
 			System.out.println("4. Previous Transaction");
-
 			System.out.println("5. Exit App");
-
 			System.out.println("========================================");
 
 			option = scanner.nextInt();
@@ -145,9 +137,9 @@ public class Account {
 		}
 
 		while (option != 5);
-
+		System.out.println("===============================");
 		System.out.println("Thank you.");
-
+		System.out.println("===============================");
 	}
 
 
