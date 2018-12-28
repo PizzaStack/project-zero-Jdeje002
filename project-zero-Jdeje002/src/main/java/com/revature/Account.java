@@ -13,23 +13,15 @@ import java.util.Scanner;
 public class Account {
 
 	protected double balance;
-
 	protected double previousTransaction;
-	
 	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
-
 	protected String username = "nxdkszrk";
-
 	protected String password = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
-
 	public void showMenu(int id) {
 
 		int option = 0;
-
 		Scanner scanner = new Scanner(System.in);
-
 		System.out.println("Welcome ");
-
 
 		do {
 
@@ -44,22 +36,16 @@ public class Account {
 			System.out.println("========================================");
 
 			option = scanner.nextInt();
-
 			System.out.println("\n");
-			
 			balance = getBalance(id);
 
 			switch (option) {
 
 			case 1:
-				
-				
-				System.out.println("===============================");
 
+				System.out.println("===============================");
 				System.out.println("Balance = " + balance);
-
 				System.out.println("===============================");
-
 				System.out.println("\n");
 
 				break;
@@ -67,55 +53,45 @@ public class Account {
 			case 2:
 
 				System.out.println("===============================");
-
 				System.out.println("Enter Deposit amount: ");
-
 				System.out.println("===============================");
-
 				double amount = scanner.nextDouble();
-
 				deposit(amount, id);
-
 				System.out.println("\n");
-
 				System.out.println("========================================");
-
 				System.out.println("Balance is now :" + balance);
-
 				System.out.println("========================================");
 
 				break;
 
 			case 3:
+				if (balance <= 0) {
+					System.out.println("=============================");
+					System.out.println("insufficient funds");
+					System.out.println("=============================");
+				} else {
 
-				System.out.println("===============================");
+					System.out.println("===============================");
+					System.out.println("Enter Withdraw amount ");
+					System.out.println("===============================");
 
-				System.out.println("Enter Withdraw amount ");
+					double amount2 = scanner.nextDouble();
 
-				System.out.println("===============================");
+					withdraw(amount2, id);
 
-				double amount2 = scanner.nextDouble();
+					System.out.println("\n");
+					System.out.println("========================================");
+					System.out.println("Balance is now :" + balance);
+					System.out.println("========================================");
 
-				withdraw(amount2, id);
-
-				System.out.println("\n");
-
-				System.out.println("========================================");
-
-				System.out.println("Balance is now :" + balance);
-
-				System.out.println("========================================");
-
+				}
 				break;
 
 			case 4:
 
 				System.out.println("===============================");
-
 				getPerviousTransaction();
-
 				System.out.println("===============================");
-
 				System.out.println("\n");
 
 				break;
@@ -142,20 +118,12 @@ public class Account {
 		System.out.println("===============================");
 	}
 
-
-
-	
 	void deposit(double amount, int id) {
 
 		if (amount != 0) {
-
 			balance = balance + amount;
-			
 			setBalance(balance, id);
-
 			previousTransaction = amount;
-			
-			
 
 		}
 
@@ -165,49 +133,41 @@ public class Account {
 
 	void withdraw(double amount, int id) {
 		balance = balance - amount;
-		
-		if(balance <= 0) {
-		System.out.println("=============================");
-		System.out.println("insufficient funds");
-		System.out.println("=============================");
-		} else {
-			
-			setBalance(balance, id);
-			previousTransaction = amount;
-		}
+		setBalance(balance, id);
+		previousTransaction = amount;
 
 	}
-	
+
 	void setBalance(double amount, int id) {
-		
+
 		try {
 			Connection db = DriverManager.getConnection(url, username, password);
-			PreparedStatement psSetBalance =db.prepareStatement("UPDATE customer SET balance = ? WHERE customer_id = ?;");
-			
+			PreparedStatement psSetBalance = db
+					.prepareStatement("UPDATE customer SET balance = ? WHERE customer_id = ?;");
+
 			psSetBalance.setDouble(1, amount);
 			psSetBalance.setInt(2, id);
 			psSetBalance.executeUpdate();
 
 			db.close();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	double getBalance(int id) {
 		double balance = 0.00;
-		
+
 		try {
 
 			Connection db = DriverManager.getConnection(url, username, password);
-
 			PreparedStatement psGetBalance = db.prepareStatement("SELECT balance FROM customer WHERE customer_id = ?");
 			psGetBalance.setInt(1, id);
-			ResultSet rs = psGetBalance.executeQuery();	
-			
+			ResultSet rs = psGetBalance.executeQuery();
+
 			while (rs.next()) {
 
 				balance = rs.getDouble(1);
@@ -216,11 +176,10 @@ public class Account {
 			rs.close();
 
 			db.close();
-	} catch (SQLException e) {
-		
-	}
-		
-		
+		} catch (SQLException e) {
+
+		}
+
 		return balance;
 	}
 
@@ -229,19 +188,16 @@ public class Account {
 	void getPerviousTransaction() {
 
 		if (previousTransaction > 0) {
-
 			System.out.println("Deposited: " + previousTransaction);
 
 		}
 
 		else if (previousTransaction < 0) {
-
 			System.out.println("Withdrawed : " + Math.abs(previousTransaction));
 
 		}
 
 		else {
-
 			System.out.println("No transaction occured");
 
 		}
