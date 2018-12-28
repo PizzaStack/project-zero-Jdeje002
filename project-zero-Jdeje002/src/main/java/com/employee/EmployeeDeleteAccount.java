@@ -14,7 +14,7 @@ public class EmployeeDeleteAccount extends Account {
 	void deleteCustomerAccount() {
 
 		Scanner scanner = new Scanner(System.in);
-
+		EmployeeAccount employeeAccount = new EmployeeAccount();
 		System.out.println("========================================");
 		System.out.println("Enter Cutomer Id To Delete Account");
 		System.out.println("========================================");
@@ -25,9 +25,9 @@ public class EmployeeDeleteAccount extends Account {
 		
 		
 		System.out.println("========================================");
-		System.out.println("Account Deleted");
+		System.out.println("Account Deleted, Returning to menu.");
 		System.out.println("========================================");
-		
+		employeeAccount.showEmployeeAccountMenu();
 		
 
 	}

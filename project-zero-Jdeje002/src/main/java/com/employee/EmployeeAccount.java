@@ -6,10 +6,6 @@ public class EmployeeAccount {
 	
 		public void showEmployeeAccountMenu() {
 			
-			System.out.println("========================================");
-			System.out.println("Wellcome back!");
-			System.out.println("========================================");
-			System.out.println("\n");
 			
 			System.out.println("========================================");
 			System.out.println("Please pick the following");
@@ -30,6 +26,7 @@ public class EmployeeAccount {
 			Scanner scanner = new Scanner(System.in);
 			int option = 0;
 			option = scanner.nextInt();
+			
 			
 			switch(option) {
 			

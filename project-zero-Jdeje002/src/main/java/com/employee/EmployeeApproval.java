@@ -15,13 +15,14 @@ public class EmployeeApproval extends Account {
 	public void approvalProcess() {
 		
 		Scanner scanner = new Scanner(System.in);
-		
+		EmployeeAccount employeeAccount = new EmployeeAccount();
 		System.out.println("========================================");
 		System.out.println("Enter Cutomer Id for approval process.");
 		System.out.println("========================================");
 		Id = scanner.nextInt();
 		getId();
 		approveOrDeny();
+		employeeAccount.showEmployeeAccountMenu();
 
 	}
 
@@ -64,7 +65,7 @@ public class EmployeeApproval extends Account {
 			break;
 		case 3:
 			System.out.println("========================================");
-			System.out.println("good bye");
+			System.out.println("Good-Bye");
 			System.out.println("========================================");
 			break;
 		}

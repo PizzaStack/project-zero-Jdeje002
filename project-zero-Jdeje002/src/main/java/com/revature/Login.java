@@ -12,6 +12,7 @@ public class Login {
 	protected String passWord;
 	protected String comparePassword;
 	protected int id;
+	protected String approval;
 	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
 	protected String usernameDb = "nxdkszrk";
 	protected String passwordDb = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
@@ -35,10 +36,43 @@ public class Login {
 		System.out.println("========================================");
 
 		this.passWord = scanner.nextLine();
-
 		
+		getApproval();
 		
+		if(approval.equals("Pending") ){
+			System.out.println("========================================");
+			System.out.println("Account Has not been approved");
+			System.out.println("========================================");
+		}else if (approval.equals("Deny")) {
+			System.out.println("========================================");
+			System.out.println("Account Has not been denied");
+			System.out.println("========================================");
+		}else {
+			loginToAccount();
+		}
+			
+	}
+		
+	public void getApproval() {
+		try {
+			Connection db = DriverManager.getConnection(url, usernameDb, passwordDb);
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery("SELECT approved from customer Where name1 = '" + this.userName + "';");
+			comparePassword = null;
 
+			while (rs.next()) {
+				approval = rs.getString(1);
+			}
+			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+		
+	public void loginToAccount() {
 		try {
 			Connection db = DriverManager.getConnection(url, usernameDb, passwordDb);
 			Statement st = db.createStatement();
@@ -48,9 +82,6 @@ public class Login {
 			while (rs.next()) {
 				comparePassword = rs.getString(2);
 				 id = rs.getInt(1);
-//	             System.out.println(comparePassword);
-//	             System.out.print("Column 2 returned ");
-//	             System.out.println(rs.getString(3));
 			}
 			rs.close();
 			st.close();
@@ -59,7 +90,7 @@ public class Login {
 		} catch (java.sql.SQLException e) {
 			System.out.println(e.getMessage());
 		}
-
+		
 		if (comparePassword == null) {
 			System.out.println("========================================");
 			System.out.println("Username does not exist. Try again.");
@@ -73,6 +104,6 @@ public class Login {
 			System.out.println("========================================");
 		}
 
+	
 	}
-
 }

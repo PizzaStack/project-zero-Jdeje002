@@ -16,6 +16,7 @@ public class ViewEmployeeApproval extends Account {
 		System.out.println("========================================");
 		System.out.println("\n");
 		getStatusArroval();
+		
 	}
 	
 	public void getStatusArroval() {
@@ -31,10 +32,9 @@ public class ViewEmployeeApproval extends Account {
 				
 				
 				System.out.print("Customer Identification: " + rs.getInt(1) + " ");
-
 				System.out.print("Customer Name: " + rs.getString(2) + " ");
-
 				System.out.print("Status: " + rs.getString(3) + " ");
+				System.out.print("\n");
 
 			}
 

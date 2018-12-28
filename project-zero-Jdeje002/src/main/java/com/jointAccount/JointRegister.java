@@ -22,6 +22,8 @@ public class JointRegister {
 	protected Double mainAccountBalance;
 	protected Double secondaryAccountBalance;
 	protected int jointAccountId;
+	protected String approvalMain;
+	protected String approvalSecondary;
 
 	public void startUp() {
 		// scanner
@@ -51,21 +53,67 @@ public class JointRegister {
 		System.out.println("\n");
 
 		this.accountPassword = scanner.nextLine();
-		// users new balance
-		SetJointaccountBalance();
-		// db insert new user into table
-		setUpJointAccountTable();
-		// get joint account account Id
+		 
+		getApprovalMain() ;
+		getApprovalSecondary();	
+		
+		if(approvalMain.equals("Pending") ||approvalSecondary.equals("Pending") ) {
+			System.out.println("========================================");
+			System.out.println("Accounts has not been approved");
+			System.out.println("========================================");
+		}else if(approvalMain.equals("Deny")||approvalSecondary.equals("Deny")) {
+			System.out.println("========================================");
+			System.out.println("Account has not been denied");
+			System.out.println("========================================");
+		} else {
+			// users new balance
+			SetJointaccountBalance();
+			// db insert new user into table
+			setUpJointAccountTable();
+			// get joint account account Id
 
-		getJointAccountId();
+			getJointAccountId();
 
-		System.out.println("===============================================");
-		System.out.println("Your Account Id is: " + jointAccountId);
-		System.out.println("===============================================");
-		System.out.println("\n");
+			System.out.println("===============================================");
+			System.out.println("Your Account Id is: " + jointAccountId);
+			System.out.println("===============================================");
+			System.out.println("\n");
+		}
+			
 
 	}
-
+	public void getApprovalMain() {
+		try {
+			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery("SELECT approved from customer Where customer_id = '" + this.mainAccountHolderId + "';");
+			while (rs.next()) {
+				approvalMain = rs.getString(1);
+			}
+			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public void getApprovalSecondary() {
+		try {
+			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);
+			Statement st = db.createStatement();
+			ResultSet rs = st.executeQuery("SELECT approved from customer Where customer_id = '" + this.secondaryAccountHolderId+ "';");
+			while (rs.next()) {
+				approvalSecondary = rs.getString(1);
+			}
+			rs.close();
+			st.close();
+			// needed
+			db.close();
+		} catch (java.sql.SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	public void setMainAccountHolderName() {
 		try {
 			Connection db = DriverManager.getConnection(url, dbUserName, dbPassword);

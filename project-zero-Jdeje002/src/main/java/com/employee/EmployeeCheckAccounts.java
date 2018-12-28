@@ -9,8 +9,9 @@ import java.sql.SQLException;
 import com.revature.Account;
 
 public class EmployeeCheckAccounts extends Account {
-
+	
 	public void getAccounts() {
+		EmployeeAccount employeeAccount = new EmployeeAccount();
 		try {
 
 			Connection db = DriverManager.getConnection(super.url, super.username, super.password);
@@ -22,11 +23,9 @@ public class EmployeeCheckAccounts extends Account {
 			while (rs.next()) {
 
 				System.out.print("Name: " + rs.getString(2) + " ");
-
 				System.out.print("Balance: " + rs.getDouble(5) + " ");
-
 				System.out.print("Status: " + rs.getString(6) + " ");
-
+				System.out.print("\n");
 			}
 
 			rs.close();
@@ -35,5 +34,7 @@ public class EmployeeCheckAccounts extends Account {
 		} catch (SQLException e) {
 
 		}
+		System.out.println("\n");
+		employeeAccount.showEmployeeAccountMenu();
 	}
 }
