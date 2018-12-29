@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+import com.revature.App;
+
 public class JointDeposit extends JointRegister {
 
 	protected double oldBalance;
@@ -13,7 +17,8 @@ public class JointDeposit extends JointRegister {
 	protected double userDeposit;
 	
 	Scanner scanner = new Scanner(System.in);
-
+	
+	
 	public void depositIntoBalance(int jointAccountId) {
 		
 		System.out.println("===============================");
@@ -31,6 +36,7 @@ public class JointDeposit extends JointRegister {
 		System.out.println("========================================");
 		System.out.println("Balance is now :" + newBalance);
 		System.out.println("========================================");
+		log.info(" User "+jointAccountId+" has deposited : "+ userDeposit+" the new balnce is : "+newBalance );
 	}
 
 	public void connectDb(int jointAccountId) {

@@ -6,12 +6,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.revature.Account;
+import com.revature.App;
 
 public class EmployeeApproval extends Account {
 
 	protected int Id;
-
+	static final Logger log = Logger.getLogger(App.class);
 	public void approvalProcess() {
 		
 		Scanner scanner = new Scanner(System.in);
@@ -59,9 +62,11 @@ public class EmployeeApproval extends Account {
 		case 1:
 			
 			conntectDbforapproval("Approved");
+			log.info("user Id: "+ Id + " has been approved ");
 			break;
 		case 2:
 			conntectDbforapproval("Deny");
+			log.info("User id: "+Id+" has been Denied");
 			break;
 		case 3:
 			System.out.println("========================================");

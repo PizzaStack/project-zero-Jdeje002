@@ -6,10 +6,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.revature.Account;
+import com.revature.App;
 
 public class EmployeeDeleteAccount extends Account {
 	private int Id;
+	static final Logger log = Logger.getLogger(App.class);
 	
 	public void deleteCustomerAccount() {
 
@@ -24,7 +28,7 @@ public class EmployeeDeleteAccount extends Account {
 		getId();
 		deleteAccount();
 		
-		
+		log.info("User Id: "+Id+" has been deleted.");
 		System.out.println("========================================");
 		System.out.println("Account Deleted, Returning to menu.");
 		System.out.println("========================================");

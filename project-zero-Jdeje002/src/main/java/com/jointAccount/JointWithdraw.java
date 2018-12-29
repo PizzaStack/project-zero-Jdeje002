@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+import com.revature.App;
+
 public class JointWithdraw extends JointRegister{
 	
 	protected double oldBalance;
@@ -13,6 +17,7 @@ public class JointWithdraw extends JointRegister{
 	protected double userWithdrawal;
 	
 	Scanner scanner = new Scanner(System.in);
+	static final Logger log = Logger.getLogger(App.class);
 	
 	public void withdrawFromJointAccount(int jointAccountId) {
 		
@@ -36,6 +41,7 @@ public class JointWithdraw extends JointRegister{
 			System.out.println("========================================");
 			System.out.println("Balance is now :" + newBalance);
 			System.out.println("========================================");
+			log.info("user id :" +jointAccountId+ " has Withdrawed: " + userWithdrawal+ " with a new blance of: "+newBalance);
 		}
 		
 	}
