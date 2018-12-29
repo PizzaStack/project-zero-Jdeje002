@@ -20,7 +20,7 @@ public class Login {
 	protected String usernameDb = "nxdkszrk";
 	protected String passwordDb = "gLuT7i1-smGK4dqU-yUcwdZXeHxgarKC";
 	
-	static final Logger log = Logger.getLogger(App.class);
+	protected static final Logger log = Logger.getLogger(App.class);
 
 
 	public void logIn() {

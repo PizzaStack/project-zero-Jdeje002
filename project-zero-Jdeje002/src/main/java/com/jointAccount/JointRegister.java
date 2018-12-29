@@ -239,7 +239,7 @@ public class JointRegister {
 							+ this.mainAccountHolder + "','" + this.secondaryAccountHolder + "','"
 							+ this.accountPassword + "','" + jointBalance + "','Pending')");
 			
-			log.info("New Joint Acocunt made with: " + mainAccountHolder + " " + secondaryAccountHolder
+			log.info("New Joint Account made with: " + mainAccountHolder + " &  " + secondaryAccountHolder
 					+ " with a balance of " + jointBalance + " and a password of : " + accountPassword);
 			
 			st.close();

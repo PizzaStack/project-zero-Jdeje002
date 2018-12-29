@@ -6,14 +6,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.employeeJointApproval.EmployeeJointAccount;
 import com.revature.Account;
+import com.revature.App;
 import com.revature.Login;
 
 public class EmployeeLogIn extends Login{
 
 		
 	public void employeeLogIn() {
+		static final Logger log = Logger.getLogger(App.class);
+		
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("========================================");
@@ -43,7 +48,7 @@ public class EmployeeLogIn extends Login{
 			Statement st = db.createStatement();
 			ResultSet rs = st.executeQuery("SELECT customer_id, password FROM employee Where name1 = '" + super.userName + "';");
 			super.comparePassword = null;
-
+			log.info(super.userName+" Logged into account");
 			while (rs.next()) {
 				super.comparePassword = rs.getString(2);
 				super.id = rs.getInt(1);
