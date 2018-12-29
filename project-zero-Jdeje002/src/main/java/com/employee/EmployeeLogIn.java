@@ -15,9 +15,9 @@ import com.revature.Login;
 
 public class EmployeeLogIn extends Login{
 
-		
+	static final Logger log = Logger.getLogger(App.class);
 	public void employeeLogIn() {
-		static final Logger log = Logger.getLogger(App.class);
+		
 		
 		Scanner scanner = new Scanner(System.in);
 

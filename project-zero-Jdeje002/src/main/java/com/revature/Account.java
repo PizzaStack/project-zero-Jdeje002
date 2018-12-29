@@ -10,8 +10,10 @@ import java.sql.Statement;
 
 import java.util.Scanner;
 
-public class Account {
+import org.apache.log4j.Logger;
 
+public class Account {
+	static final Logger log = Logger.getLogger(App.class);
 	protected double balance;
 	protected double previousTransaction;
 	protected String url = "jdbc:postgresql://baasu.db.elephantsql.com:5432/nxdkszrk";
@@ -124,7 +126,7 @@ public class Account {
 			balance = balance + amount;
 			setBalance(balance, id);
 			previousTransaction = amount;
-
+			log.info("Account Id :"+ id + "has Deposited : "+ balance );
 		}
 
 	}
@@ -135,7 +137,7 @@ public class Account {
 		balance = balance - amount;
 		setBalance(balance, id);
 		previousTransaction = amount;
-
+		log.info("Account Id :"+ id + "has Withdrawed : "+ balance );
 	}
 
 	void setBalance(double amount, int id) {
@@ -144,7 +146,7 @@ public class Account {
 			Connection db = DriverManager.getConnection(url, username, password);
 			PreparedStatement psSetBalance = db
 					.prepareStatement("UPDATE customer SET balance = ? WHERE customer_id = ?;");
-
+			log.info("Account Id :"+ id + "new balance is : "+ balance );
 			psSetBalance.setDouble(1, amount);
 			psSetBalance.setInt(2, id);
 			psSetBalance.executeUpdate();
