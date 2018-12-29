@@ -6,14 +6,18 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import com.revature.Account;
+import com.revature.App;
 
 public class JointLogIn extends JointRegister {
 
 	private String comparePassword;
 	private String tryPassword;
 	private int jointAccountId;
-
+	static final Logger log = Logger.getLogger(App.class);
+	
 	public void jointLogIn() {
 		Scanner scanner = new Scanner(System.in);
 
@@ -35,6 +39,7 @@ public class JointLogIn extends JointRegister {
 
 		checkJointaccount();
 		CheckPassword();
+		log.info("User :"+super.jointAccountId+" has logged in");
 	}
 
 	public void checkJointaccount() {
